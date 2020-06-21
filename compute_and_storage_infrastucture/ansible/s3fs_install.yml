@@ -1,0 +1,36 @@
+---
+- hosts: tag_Web_Server_True
+  tasks:
+          - name: ensure s3fs is installed and latest
+            apt: name=s3fs state=latest
+          - name: copy creds
+            copy:
+                    src: /home/ubuntu/ansible/passwd-s3fs
+                    dest: /etc/passwd-s3fs
+          - name: set permissions
+            file:
+                    path: /etc/passwd-s3fs
+                    mode: 640
+          - name: make mountpoint
+            file:
+                    path: /ipspace_bucket
+                    state: directory
+          - name: check if s3 bucket already mounted
+            command: /bin/mountpoint -q /ipspace_bucket
+            register: mount_status
+          - name: mount s3 bucket
+            command: /usr/bin/s3fs ipspace -o use_cache=/tmp -o allow_other -o uid=1001 -o mp_umask=002 -o multireq_max=5 /ipspace_bucket
+            when: mount_status.rc != 0
+          - name: make sure rc.local exists
+            copy:
+                    remote_src: yes
+                    src: /dev/null
+                    dest: /etc/rc.local
+                    force: no
+                    owner: root
+                    group: root
+                    mode: 755
+          - name: configure rc.local to mount on boot
+            lineinfile:
+                    path: /etc/rc.local
+                    line: /usr/bin/s3fs ipspace -o use_cache=/tmp -o allow_other -o uid=1001 -o mp_umask=002 -o multireq_max=5 /ipspace_bucket
