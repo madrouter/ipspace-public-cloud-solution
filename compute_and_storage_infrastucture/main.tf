@@ -58,6 +58,7 @@ resource "aws_instance" "web" {
 
 	tags = {
 		Name = "Web_Server"
+		Blah_Tag
 	}
 }
 
