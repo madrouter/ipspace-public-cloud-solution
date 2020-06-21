@@ -6,12 +6,16 @@ provider "aws" {
 
 # Find a VPC
 data "aws_vpc" "selected" {
-	name = "Some Name"
+	tags = {
+		Name = "Some Name"
+	}
 }
 
 # Find a subnet
 data "aws_subnet" "selected" {
-	name = "Ansible_Subnet"
+	tags = {
+		Name = "Ansible_Subnet"
+	}
 }
 
 # Find an AMI
