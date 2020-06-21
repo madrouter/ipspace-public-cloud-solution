@@ -20,7 +20,7 @@ data "aws_ami" "ubuntu" {
 
 	filter {
 		name = "name"
-		values = "ubuntu/images/hvm-ssd/ubuntu-bionic-18.04-amd64-server-*"
+		values = ["ubuntu/images/hvm-ssd/ubuntu-bionic-18.04-amd64-server-*"]
 	}
 	filter {
 		name = "virtualization-type"
@@ -44,6 +44,6 @@ resource "aws_instance" "web" {
 	keypair = "${data.aws_keypair.selected.id}"
 
 	tags = {
-		Name = Web_Server
+		Name = "Web_Server"
 	}
 }
