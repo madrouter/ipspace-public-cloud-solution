@@ -30,6 +30,24 @@ data "aws_ami" "ubuntu" {
 	owners = ["099720109477"] # Canonical
 }
 
+resource "aws_security_group" "allow_http" {
+	name = "allow_http"
+	description = "Allow inbound HTTP"
+	vpc_id = data.aws_vpc.selected.id
+
+	ingress {
+		description = "HTTP from Anywhere"
+		from_port = 443
+		to_port = 443
+		protocol = "tcp"
+		cidr_blocks = ["0.0.0.0/0"]
+	}
+
+	tags = {
+		Name = "allow_http"
+	}
+}
+
 resource "aws_instance" "web" {
 	ami = data.aws_ami.ubuntu.id
 	instance_type = "t2.micro"
