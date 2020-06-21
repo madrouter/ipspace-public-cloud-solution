@@ -30,18 +30,10 @@ data "aws_ami" "ubuntu" {
 	owners = ["099720109477"] # Canonical
 }
 
-# Find a KeyPair
-data "aws_key_pair" "selected" {
-	filter {
-		name = "name"
-		value = "AWS_SSH_Keypair"
-	}
-}
-
 resource "aws_instance" "web" {
 	ami = "${data.aws_ami.ubuntu.id}"
 	instance_type = "t2.micro"
-	key_pair = "${data.aws_key_pair.selected.id}"
+	key_name = "AWS_SSH_Keypair"
 
 	tags = {
 		Name = "Web_Server"
