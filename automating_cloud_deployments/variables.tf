@@ -3,7 +3,7 @@ variable "vpc_name" {
 	default = "ipspace_homework_vpc"
 }
 
-variable "vpc_tags" {
-	type = list(string)
-	value = ["tag1"]
+variable "vpc_name_tag" {
+	type = string
+	value = "${var.vpc_name}"
 }
