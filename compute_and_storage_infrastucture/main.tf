@@ -52,14 +52,14 @@ resource "aws_iam_role_policy" "s3mountrole_policy" {
 	name = "s3mountrole_policy"
 
 	role = aws_iam_role.s3mountrole.id
-	policy = "${file("s3mount_policy.json")}"
+	policy = file("s3mount_policy.json")
 	
 }
 
 resource "aws_iam_role" "s3mountrole" {
 	name = "s3mountrole"
 
-	assume_role_policy = "${file("s3mountrole-assume-policy.json")}"
+	assume_role_policy = file("s3mountrole-assume-policy.json")
 }
 
 resource "aws_iam_instance_profile" "s3mountrole_instance_profile" {
