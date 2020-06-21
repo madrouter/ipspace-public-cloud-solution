@@ -5,5 +5,5 @@ variable "vpc_name" {
 
 variable "vpc_name_tag" {
 	type = string
-	value = "Some Name"
+	default = "Some Name"
 }
