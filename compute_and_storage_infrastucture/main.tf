@@ -31,7 +31,7 @@ data "aws_ami" "ubuntu" {
 }
 
 # Find a KeyPair
-data "aws_keypair" "selected" {
+data "aws_key_pair" "selected" {
 	filter {
 		name = "name"
 		value = "AWS_SSH_Keypair"
@@ -41,7 +41,7 @@ data "aws_keypair" "selected" {
 resource "aws_instance" "web" {
 	ami = "${data.aws_ami.ubuntu.id}"
 	instance_type = "t2.micro"
-	keypair = "${data.aws_keypair.selected.id}"
+	key_pair = "${data.aws_key_pair.selected.id}"
 
 	tags = {
 		Name = "Web_Server"
