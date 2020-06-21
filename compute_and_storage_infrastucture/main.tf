@@ -41,3 +41,8 @@ resource "aws_instance" "web" {
 		Name = "Web_Server"
 	}
 }
+
+resource "aws_eip" "web_eip" {
+	instance = aws_instance.web.id
+	vpc = true
+}
