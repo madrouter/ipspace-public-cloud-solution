@@ -17,20 +17,21 @@
                     state: directory
           - name: check if s3 bucket already mounted
             command: /bin/mountpoint -q /ipspace_bucket
+            failed_when: mount_status.rc not in [0,1]
             register: mount_status
           - name: mount s3 bucket
             command: /usr/bin/s3fs ipspace -o use_cache=/tmp -o allow_other -o uid=1001 -o mp_umask=002 -o multireq_max=5 /ipspace_bucket
             when: mount_status.rc != 0
           - name: make sure rc.local exists
             copy:
-                    remote_src: yes
-                    src: /dev/null
+                    src: /home/ubuntu/ipspace-public-cloud-solution/compute_and_storage_infrastucture/ansible/s3fs-rc.local
                     dest: /etc/rc.local
                     force: no
                     owner: root
                     group: root
-                    mode: 755
+                    mode: 0755
           - name: configure rc.local to mount on boot
             lineinfile:
                     path: /etc/rc.local
                     line: /usr/bin/s3fs ipspace -o use_cache=/tmp -o allow_other -o uid=1001 -o mp_umask=002 -o multireq_max=5 /ipspace_bucket
+                    insertbefore: 'exit 0'
