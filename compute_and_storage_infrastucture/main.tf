@@ -31,9 +31,11 @@ data "aws_ami" "ubuntu" {
 }
 
 resource "aws_instance" "web" {
-	ami = "${data.aws_ami.ubuntu.id}"
+	ami = data.aws_ami.ubuntu.id
 	instance_type = "t2.micro"
 	key_name = "AWS_SSH_Keypair"
+	subnet_id = data.aws_subnet.selected.id
+
 
 	tags = {
 		Name = "Web_Server"
