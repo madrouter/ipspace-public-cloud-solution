@@ -1,8 +1,8 @@
-output "vpc_arn" {
-	value = data.aws_vpc.selected.arn
+output "instance_arn" {
+	value = aws_instance.web.arn
 	description = "ARN of the VPC"
 }
-output "vpc_id" {
-	value = data.aws_vpc.selected.id
+output "instance_id" {
+	value = aws_instance.web.id
 	description = "ID of the VPC"
 }

@@ -1,4 +1,4 @@
 variable "vpc_name_tag" {
 	type = string
-	default = "Some Name"
+	default = "Some Other Name"
 }
