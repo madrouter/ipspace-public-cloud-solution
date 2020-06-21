@@ -4,10 +4,7 @@ provider "aws" {
 	  region = "ap-southeast-2"
 }
 
-# Create a VPC
-resource "aws_vpc" "ipspace_homework" {
-	cidr_block = "192.168.0.0/16"
-	tags = {
-		Name = "${var.vpc_name_tag}"
-	}
+# Find a VPC
+data "aws_vpc" "selected" {
+	id = "vpc-0637f3e7dd807f078"
 }
