@@ -53,6 +53,7 @@ resource "aws_instance" "web" {
 	instance_type = "t2.micro"
 	key_name = "AWS_SSH_Keypair"
 	subnet_id = data.aws_subnet.selected.id
+	vpc_security_group_ids = [aws_security_group.allow_http.id,"sg-0b057632ad72f1e67"]
 
 
 	tags = {
