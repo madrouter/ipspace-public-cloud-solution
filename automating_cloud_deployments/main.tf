@@ -5,6 +5,7 @@ provider "aws" {
 }
 
 # Create a VPC
-resource "aws_vpc" "ipspace_homework" {
+resource "aws_vpc" "${var.vpc_name}" {
 	cidr_block = "192.168.0.0/16"
+	tags = ${var.vpc_tags}
 }
