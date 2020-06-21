@@ -39,9 +39,9 @@ data "aws_keypair" "selected" {
 }
 
 resource "aws_instance" "web" {
-	ami = "${data.aws_ami.ubuntu.id"
+	ami = "${data.aws_ami.ubuntu.id}"
 	instance_type = "t2.micro"
-	keypair = "$data.aws_keypair.selected.id"
+	keypair = "${data.aws_keypair.selected.id}"
 
 	tags = {
 		Name = Web_Server
