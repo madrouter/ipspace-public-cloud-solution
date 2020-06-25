@@ -1,0 +1,13 @@
+---
+- hosts: tag_Web_Server_True
+  gather_facts: no
+
+  tasks:
+          - name: Check Webpage
+            uri:
+                    url: "http://{{ ec2_ip_address }}"
+            delegate_to: 127.0.0.1
+
+          - name: Check ping
+            shell: ping -c 1 -w 2 10.17.1.30
+            ignore_errors: true

@@ -1,0 +1,44 @@
+---
+- hosts: tag_Web_Server_True
+  gather_facts: no
+
+  pre_tasks:
+          - set_fact:
+                  ansible_host: "{{ ec2_ip_address }}"
+
+  tasks:
+          - name: Gather Facts
+            setup:
+          - name: ensure apache2 is installed and latest
+            apt: name=apache2 state=latest
+          - name: start apache2
+            service:
+                    name: apache2
+                    state: started
+          - name: copy default config file and restart apache2
+            copy:
+                    src: /home/ubuntu/ipspace-public-cloud-solution/deploy_virtual_network_infrastructure/ansible/default_site.conf
+                    dest: /etc/apache2/sites-available/000-default.conf
+          - name: copy apache2 config file and restart apache2
+            copy:
+                    src: /home/ubuntu/ipspace-public-cloud-solution/deploy_virtual_network_infrastructure/ansible/apache2.conf
+                    dest: /etc/apache2/apache2.conf
+          - name: enable mod_cgi
+            file:
+                    src: /etc/apache2/mods-available/cgi.load
+                    dest: /etc/apache2/mods-enabled/cgi.load
+                    state: link
+          - name: enable mod_ssi
+            file:
+                    src: /etc/apache2/mods-available/include.load
+                    dest: /etc/apache2/mods-enabled/include.load
+                    state: link
+          - name: create symlink for default site
+            file:
+                    src: /etc/apache2/sites-available/000-default.conf
+                    dest: /etc/apache2/sites-enabled/000-default.conf
+                    state: link
+          - name: restart apache2
+            service:
+                    name: apache2
+                    state: restarted

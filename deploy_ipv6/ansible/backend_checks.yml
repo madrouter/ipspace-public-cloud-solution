@@ -1,0 +1,11 @@
+---
+- hosts: tag_Name_Backend_Server
+  gather_facts: no
+
+  pre_tasks:
+          - name: Check ping inside
+            raw: ping -c 1 -w 2 10.17.1.30
+            ignore_errors: true
+          - name: Check ping outside
+            raw: ping -c 1 -w 2 8.8.8.8
+            ignore_errors: true
