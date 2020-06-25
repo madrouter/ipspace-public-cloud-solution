@@ -88,7 +88,6 @@ resource "aws_security_group_rule" "allow_http" {
 	security_group_id = aws_security_group.default_sg.id
 
 	type = "ingress"
-	description = "HTTP from Anywhere"
 	from_port = 80
 	to_port = 80
 	protocol = "tcp"
@@ -101,7 +100,6 @@ resource "aws_security_group_rule" "allow_https" {
 	security_group_id = aws_security_group.default_sg.id
 
 	type = "ingress"
-	description = "HTTPS from Anywhere"
 	from_port = 443
 	to_port = 443
 	protocol = "tcp"
@@ -114,7 +112,6 @@ resource "aws_security_group_rule" "allow_ssh" {
 	security_group_id = aws_security_group.default_sg.id
 
 	type = "ingress"
-	description = "SSH from Anywhere"
 	from_port = 22
 	to_port = 22
 	protocol = "tcp"
