@@ -1,6 +1,13 @@
 ---
 - hosts: tag_Web_Server_True
+  gather_facts: no
+
+  pre_tasks:
+        - set_fact:
+                ansible_host: "{{ ec2_ip_address }}"
   tasks:
+          - name: Gathering facts
+            setup:
           - name: ensure s3fs is installed and latest
             apt: name=s3fs state=latest
           - name: copy creds
