@@ -33,8 +33,8 @@ resource "aws_vpc" "ipspace_vpc" {
 resource "aws_subnet" "public_subnet" {
 	vpc_id = aws_vpc.ipspace_vpc.id
 #	cidr_block = "10.17.1.0/24"
-	cidr_block = "${cidrsubnet(aws_vpc.ipspace_vpc.cidr_block,8,1)}"
-	ipv6_cidr_block = "${cidrsubnet(aws_vpc.ipspace_vpc.ipv6_cidr_block,8,1)}"
+	cidr_block = cidrsubnet(aws_vpc.ipspace_vpc.cidr_block,8,1)
+	ipv6_cidr_block = cidrsubnet(aws_vpc.ipspace_vpc.ipv6_cidr_block,8,1)
 	map_public_ip_on_launch = true
 	assign_ipv6_address_on_creation = true
 
@@ -47,8 +47,8 @@ resource "aws_subnet" "public_subnet" {
 resource "aws_subnet" "private_subnet" {
 	vpc_id = aws_vpc.ipspace_vpc.id
 #	cidr_block = "10.17.2.0/24"
-	cidr_block = "${cidrsubnet(aws_vpc.ipspace_vpc.cidr_block,8,2)}"
-	ipv6_cidr_block = "${cidrsubnet(aws_vpc.ipspace_vpc.ipv6_cidr_block,8,2)}"
+	cidr_block = cidrsubnet(aws_vpc.ipspace_vpc.cidr_block,8,2)
+	ipv6_cidr_block = cidrsubnet(aws_vpc.ipspace_vpc.ipv6_cidr_block,8,2)
 	assign_ipv6_address_on_creation = true
 
 	tags = {
