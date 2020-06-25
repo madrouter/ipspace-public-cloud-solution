@@ -1,6 +1,8 @@
-- hosts: vpc_id_vpc_0160626e11aa375d6
+- hosts: vpc_id_vpc_0031b32ede52ea301
   become: yes
   gather_facts: no
   pre_tasks:
+  - set_fact:
+          ansible_host: "{{ ec2_ip_address }}"
   - name: 'install python'
     raw: 'sudo apt-get -y install python'
