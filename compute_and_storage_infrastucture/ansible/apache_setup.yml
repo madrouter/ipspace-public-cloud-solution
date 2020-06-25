@@ -9,11 +9,11 @@
                     state: started
           - name: copy default config file and restart apache2
             copy:
-                    src: /home/ubuntu/ansible/default_site.cfg
+                    src: /home/ubuntu/ipspace-public-cloud-solution/compute_and_storage_infrastucture/ansible/default_site.conf
                     dest: /etc/apache2/sites-available/000-default.conf
           - name: copy apache2 config file and restart apache2
             copy:
-                    src: /home/ubuntu/ansible/apache2.conf
+                    src: /home/ubuntu/ipspace-public-cloud-solution/compute_and_storage_infrastucture/ansible/apache2.conf
                     dest: /etc/apache2/apache2.conf
           - name: enable mod_cgi
             file:
