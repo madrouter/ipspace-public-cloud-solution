@@ -11,7 +11,7 @@ The solution used makes use of both Terraform and Ansible.
 Terraform is used to configure the AWS infrastructure to the point where the base server will fire up.  After that, Ansible takes over to install Apache, mount the S3 bucket and configure the server.
 ## Solution Detail
  
-###Terraform
+### Terraform
 Terraform will perform the following:
  - Create a new VPC
  - Create a new public subnet
